@@ -334,18 +334,21 @@
   function revealScore(btn, homeScore, awayScore, homeOwner, awayOwner, played){
     btn.outerHTML = `<span class="match-score">${homeScore ?? 0} – ${awayScore ?? 0}</span>`;
 
-    if (!played) return; // no score yet, nothing to taunt about
+    if (!played) return;
 
     const hs = homeScore ?? 0, as = awayScore ?? 0;
     if (hs === as){
-      showTaunt("It's a draw, lads", true);
+      showTaunt("It's a draw, lads 🤝", true);
       return;
     }
+    const winningOwner = hs > as ? homeOwner : awayOwner;
     const losingOwner = hs > as ? awayOwner : homeOwner;
-    if (losingOwner){
-      showTaunt(`Suck it ${losingOwner}`);
+    if (winningOwner && losingOwner){
+      showTaunt(`${winningOwner}: SUCK MY DICK ${losingOwner}! 😂`);
+    } else if (losingOwner){
+      showTaunt(`SUCK MY DICK ${losingOwner}! 😂`);
     } else {
-      showTaunt(hs > as ? "Home team winning" : "Away team winning", true);
+      showTaunt(hs > as ? "Home team winning 🏆" : "Away team winning 🏆", true);
     }
   }
 
